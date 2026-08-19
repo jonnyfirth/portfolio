@@ -299,7 +299,7 @@
     });
   </script>
 
-  <!-- SCRIPT TO LOAD CMS PROJECTS -->
+<!-- SCRIPT TO LOAD & SORT CMS PROJECTS WITH LINKS -->
   <script>
     async function loadCMSProjects() {
       const grid = document.getElementById('projectGrid');
@@ -310,15 +310,31 @@
 
         if (Array.isArray(files)) {
           grid.innerHTML = ''; // Clear default state
-          
+          const projectList = [];
+
+          // 1. Fetch all JSON project data
           for (const file of files) {
             if (file.name.endsWith('.json')) {
               const res = await fetch(file.download_url);
               const data = await res.json();
+              projectList.push(data);
+            }
+          }
 
-              const card = document.createElement('article');
-              card.className = 'card';
-              card.innerHTML = `
+          // 2. Sort projects manually by the "order" field (lowest number first)
+          projectList.sort((a, b) => (a.order || 99) - (b.order || 99));
+
+          // 3. Render projects into the grid
+          for (const data of projectList) {
+            const card = document.createElement('article');
+            card.className = 'card';
+            
+            // Set link destination if present
+            const targetUrl = data.link || '#';
+            const openInNewTab = data.link ? 'target="_blank" rel="noopener noreferrer"' : '';
+
+            card.innerHTML = `
+              <a href="${targetUrl}" ${openInNewTab} style="text-decoration: none; color: inherit; display: block;">
                 <div class="card-img-wrapper">
                   <img src="${data.image}" alt="${data.title}">
                 </div>
@@ -326,9 +342,9 @@
                   <div class="card-title">${data.title}</div>
                   <div class="card-sub">${data.category}</div>
                 </div>
-              `;
-              grid.appendChild(card);
-            }
+              </a>
+            `;
+            grid.appendChild(card);
           }
         }
       } catch (err) {
