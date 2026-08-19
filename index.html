@@ -141,8 +141,8 @@
 
     /* MASONRY GRID (Dynamic Card Heights) */
     .grid {
-      column-count: 2; /* 2 columns on desktop */
-      column-gap: 1.5rem;
+      column-count: 3; /* 3 columns on desktop */
+      column-gap: 1.3rem;
     }
 
     .card {
@@ -212,8 +212,12 @@
       text-decoration: underline;
     }
 
-    @media (max-width: 768px) {
-      .grid { column-count: 1; } /* Clean single column on mobile */
+ @media (max-width: 1024px) {
+      .grid { column-count: 2; } /* 2 columns on tablets */
+    }
+
+    @media (max-width: 600px) {
+      .grid { column-count: 1; } /* 1 column on mobile phones */
       .hero-overlay-text { font-size: 2.2rem; }
     }
   </style>
