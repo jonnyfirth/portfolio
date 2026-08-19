@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jonny Firth</title>
+  
+  <!-- Google Fonts: Inconsolata Light (200, 300) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400&display=swap" rel="stylesheet">
+
+  <style>
+    /* RESET & VARS */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      /* Exact sRGB Conversions */
+      --red: #E4393B;            /* sRGB 0.894 0.222 0.232 */
+      --text-light: #FDEDED;     /* sRGB 0.994 0.927 0.926 */
+      --dark-bg: #222222;
+      --card-bg: #000000;
+      
+      --font-serif: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;
+      --font-mono: 'Inconsolata', monospace;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-light);
+      font-family: var(--font-mono);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* TOP HEADER BAR */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: var(--red);
+      color: var(--text-light);
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 50;
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      line-height: 1;
+      font-weight: 400;
+      color: var(--text-light);
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-weight: 300;
+      font-size: 0.95rem;
+      transition: opacity 0.2s ease;
+    }
+
+    nav a:hover {
+      opacity: 0.7;
+    }
+
+    /* HERO SECTION */
+    .hero-banner {
+      background-color: var(--red);
+      padding-top: 5rem;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Central Polaroid Frame */
+    .polaroid-frame {
+      width: 320px;
+      max-width: 80vw;
+      background: #ffffff;
+      padding: 1rem 1rem 3.5rem 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+      transform: rotate(-1deg);
+    }
+
+    .polaroid-frame img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Big Caslon Title Container */
+    .hero-title-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-overlay-text {
+      width: 90%;
+      max-width: 1100px;
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 6.5vw, 5.5rem);
+      line-height: 0.95;
+      color: #000000;
+      text-align: center;
+      letter-spacing: -0.01em;
+      font-weight: 400;
+      will-change: transform;
+    }
+
+    /* WORK GRID SECTION */
+    .content-container {
+      padding: 4rem 1.5rem 6rem 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 3;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Edgy Rounded Cards */
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      padding: 0.6rem;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card-img-wrapper {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 4px;
+      overflow: hidden;
+      background-color: #111;
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-meta {
+      padding: 1rem 0.5rem 0.5rem 0.5rem;
+      font-family: var(--font-mono);
+      font-weight: 300;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      color: var(--text-light);
+      margin-bottom: 0.3rem;
+      font-weight: 400;
+    }
+
+    .card-sub {
+      font-size: 0.85rem;
+      color: #888888;
+    }
+
+    /* FOOTER / INFO */
+    footer {
+      border-top: 1px solid #333;
+      padding: 3rem 1.5rem;
+      font-family: var(--font-mono);
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: #888;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    footer a {
+      color: var(--text-light);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero-overlay-text { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STICKY TOP HEADER -->
+  <header>
+    <a href="#" class="logo">Jonny Firth</a>
+    <nav>
+      <a href="#about">Information</a>
+      <a href="mailto:mail@jonnyfirth.com">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO BANNER -->
+  <section class="hero-banner">
+    <div class="polaroid-frame">
+      <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=800" alt="Studio Setup">
+    </div>
+
+    <div class="hero-title-wrapper">
+      <h1 class="hero-overlay-text" id="heroText">
+        producer / sound design & composer / audio & mixing engineer
+      </h1>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO GRID -->
+  <main class="content-container">
+    <div class="grid">
+
+      <!-- Project 1 -->
+      <article class="card">
+        <div class="card-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1000" alt="Project 1">
+        </div>
+        <div class="card-meta">
+          <div class="card-title">Alpine Thistle</div>
+          <div class="card-sub">Plantae, Asteraceae</div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="card">
+        <div class="card-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=1000" alt="Project 2">
+        </div>
+        <div class="card-meta">
+          <div class="card-title">Bells of Ireland</div>
+          <div class="card-sub">Portrait</div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- FOOTER / ABOUT -->
+  <footer id="about">
+    <div>
+      <p>composition and sound design across music, film, tv, art</p>
+      <p>@ Tileyard Studios in Kings Cross, London</p>
+    </div>
+    <div>
+      <p>Contact: <a href="mailto:mail@jonnyfirth.com">mail@jonnyfirth.com</a></p>
+    </div>
+  </footer>
+
+  <!-- SIMPLE DIRECT SCROLL SCRIPT -->
+  <script>
+    const heroText = document.getElementById('heroText');
+
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.scrollY;
+      heroText.style.transform = `translateY(-${scrollPosition * 1.2}px)`;
+    });
+  </script>
+
+</body>
+</html>
