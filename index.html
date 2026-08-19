@@ -85,28 +85,18 @@
       overflow: hidden;
     }
 
-    /* Central Polaroid Frame */
-    .polaroid-frame {
-      width: 320px;
-      height: 600px;
-      max-width: 80vw;
-      background: #ffffff;
-      padding: 1rem 1rem 3.5rem 1rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      position: relative;
-      z-index: 1;
-      transform: rotate(-1deg);
-    }
-
-/* Slide dimensions without the polaroid frame */
+    /* Slide dimensions (Centered without Polaroid Frame) */
     .polaroid-slide {
       position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
       max-width: 380px;      /* Limits maximum width on large screens */
-      max-height: 420px;     /* Prevents tall vertical images from blowing out the section */
-      object-fit: contain;  /* Fits the entire image inside without cropping edges */
+      max-height: 420px;     /* Prevents tall vertical images from blowing out section */
+      object-fit: contain;   /* Fits entire image inside without cropping */
       display: none;
       z-index: 1;
-      border-radius: 4px; /* Optional subtle rounded edges */
     }
 
     .polaroid-slide.active {
@@ -149,40 +139,39 @@
       z-index: 3;
     }
 
- /* MASONRY GRID (Dynamic Card Heights) */
-  .grid {
-    column-count: 2; /* 2 columns on desktop */
-    column-gap: 1.5rem;
-  }
+    /* MASONRY GRID (Dynamic Card Heights) */
+    .grid {
+      column-count: 2; /* 2 columns on desktop */
+      column-gap: 1.5rem;
+    }
 
-  .card {
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    padding: 0.6rem;
-    display: inline-block; /* Required for column masonry */
-    width: 100%;
-    margin-bottom: 1.5rem; /* Replaces row-gap */
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      padding: 0.6rem;
+      display: inline-block; /* Required for column masonry */
+      width: 100%;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-  .card-img-wrapper {
-    width: 100%;
-    /* Remove aspect-ratio entirely so height adjusts to image dimensions */
-    border-radius: 4px;
-    overflow: hidden;
-    background-color: #111;
-  }
+    .card:hover {
+      transform: translateY(-4px);
+    }
 
-  .card-img-wrapper img {
-    width: 100%;
-    height: auto; /* Lets the natural image height dictate card size */
-    display: block;
-  }
+    .card-img-wrapper {
+      width: 100%;
+      border-radius: 4px;
+      overflow: hidden;
+      background-color: #111;
+    }
 
-  @media (max-width: 768px) {
-    .grid { column-count: 1; } /* Drops to 1 column on mobile */
-  }
+    .card-img-wrapper img {
+      width: 100%;
+      height: auto; /* Lets image dimensions dictate card height */
+      display: block;
+    }
 
     .card-meta {
       padding: 1rem 0.5rem 0.5rem 0.5rem;
@@ -223,8 +212,8 @@
       text-decoration: underline;
     }
 
-    @media (max-width: 600px) {
-      .grid { grid-template-columns: 1fr; }
+    @media (max-width: 768px) {
+      .grid { column-count: 1; } /* Clean single column on mobile */
       .hero-overlay-text { font-size: 2.2rem; }
     }
   </style>
@@ -242,11 +231,11 @@
 
   <!-- HERO BANNER -->
   <section class="hero-banner">
-      <img class="polaroid-slide active" src="/images/uploads/polaroid1.jpg" alt="Polaroid 1">
-      <img class="polaroid-slide" src="/images/uploads/polaroid2.jpg" alt="Polaroid 2">
-      <img class="polaroid-slide" src="/images/uploads/polaroid3.jpg" alt="Polaroid 3">
-      <img class="polaroid-slide" src="/images/uploads/polaroid4.jpg" alt="Polaroid 4">
-      <img class="polaroid-slide" src="/images/uploads/polaroid5.jpg" alt="Polaroid 5">
+    <img class="polaroid-slide active" src="/images/uploads/polaroid1.jpg" alt="Polaroid 1">
+    <img class="polaroid-slide" src="/images/uploads/polaroid2.jpg" alt="Polaroid 2">
+    <img class="polaroid-slide" src="/images/uploads/polaroid3.jpg" alt="Polaroid 3">
+    <img class="polaroid-slide" src="/images/uploads/polaroid4.jpg" alt="Polaroid 4">
+    <img class="polaroid-slide" src="/images/uploads/polaroid5.jpg" alt="Polaroid 5">
 
     <div class="hero-title-wrapper">
       <h1 class="hero-overlay-text" id="heroText">
@@ -298,7 +287,7 @@
     });
   </script>
 
-<!-- SCRIPT TO LOAD & SORT CMS PROJECTS WITH LINKS -->
+  <!-- SCRIPT TO LOAD & SORT CMS PROJECTS WITH LINKS -->
   <script>
     async function loadCMSProjects() {
       const grid = document.getElementById('projectGrid');
