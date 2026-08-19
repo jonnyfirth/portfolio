@@ -88,6 +88,7 @@
     /* Central Polaroid Frame */
     .polaroid-frame {
       width: 320px;
+      height: 450px;
       max-width: 80vw;
       background: #ffffff;
       padding: 1rem 1rem 3.5rem 1rem;
@@ -97,29 +98,19 @@
       transform: rotate(-1deg);
     }
 
-    /* Polaroid Image Wrapper & Slideshow */
-    .polaroid-img-wrapper {
-      position: relative;
-      width: 100%;
-      height: 380px;
-      overflow: hidden;
-      background: #111;
-    }
-
+    /* Direct Polaroid Slides (Instant Cut, No Fade) */
     .polaroid-slide {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 1rem;
+      left: 1rem;
+      width: calc(100% - 2rem);
+      height: 380px;
       object-fit: cover;
-      display: block;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
+      display: none;
     }
 
     .polaroid-slide.active {
-      opacity: 1;
+      display: block;
     }
 
     /* Big Caslon Title Container */
@@ -252,15 +243,11 @@
 
   <!-- HERO BANNER -->
   <section class="hero-banner">
-    <div class="polaroid-frame">
-      <div class="polaroid-img-wrapper">
-        <img class="polaroid-slide active" src="/images/uploads/polaroid1.jpg" alt="Polaroid 1">
-        <img class="polaroid-slide" src="/images/uploads/polaroid2.jpg" alt="Polaroid 2">
-        <img class="polaroid-slide" src="/images/uploads/polaroid3.jpg" alt="Polaroid 3">
-        <img class="polaroid-slide" src="/images/uploads/polaroid4.jpg" alt="Polaroid 4">
-        <img class="polaroid-slide" src="/images/uploads/polaroid5.jpg" alt="Polaroid 5">
-      </div>
-    </div>
+      <img class="polaroid-slide active" src="/images/uploads/polaroid1.jpg" alt="Polaroid 1">
+      <img class="polaroid-slide" src="/images/uploads/polaroid2.jpg" alt="Polaroid 2">
+      <img class="polaroid-slide" src="/images/uploads/polaroid3.jpg" alt="Polaroid 3">
+      <img class="polaroid-slide" src="/images/uploads/polaroid4.jpg" alt="Polaroid 4">
+      <img class="polaroid-slide" src="/images/uploads/polaroid5.jpg" alt="Polaroid 5">
 
     <div class="hero-title-wrapper">
       <h1 class="hero-overlay-text" id="heroText">
@@ -287,7 +274,7 @@
     </div>
   </footer>
 
-  <!-- POLAROID AUTOMATIC SLIDESHOW SCRIPT -->
+  <!-- INSTANT SNAP SLIDESHOW SCRIPT (2 SECONDS) -->
   <script>
     const slides = document.querySelectorAll('.polaroid-slide');
     let currentSlide = 0;
@@ -298,8 +285,8 @@
       slides[currentSlide].classList.add('active');
     }
 
-    // Changes photo every 3.5 seconds
-    setInterval(nextSlide, 3500);
+    // Instantly cuts to the next image every 2000ms (2 seconds)
+    setInterval(nextSlide, 2000);
   </script>
 
   <!-- SIMPLE DIRECT SCROLL SCRIPT -->
