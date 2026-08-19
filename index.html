@@ -101,10 +101,9 @@
 /* Slide dimensions without the polaroid frame */
     .polaroid-slide {
       position: absolute;
-      width: 450px;
-      height: 500px;
-      max-width: 80vw;
-      object-fit: cover;
+      max-width: 380px;      /* Limits maximum width on large screens */
+      max-height: 420px;     /* Prevents tall vertical images from blowing out the section */
+      object-fit: contain;  /* Fits the entire image inside without cropping edges */
       display: none;
       z-index: 1;
       border-radius: 4px; /* Optional subtle rounded edges */
