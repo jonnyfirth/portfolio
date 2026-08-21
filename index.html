@@ -315,6 +315,15 @@
       color: var(--text-light);
       text-decoration: underline;
     }
+    
+    /* CARD VIDEO AUTOPLAY */
+    .card-img-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 4px;
+    }
 
  @media (max-width: 1024px) {
       .grid { column-count: 2; } /* 2 columns on tablets */
@@ -397,7 +406,7 @@
     });
   </script>
 
-  <!-- SCRIPT TO LOAD & SORT CMS PROJECTS WITH LINKS -->
+  <!-- SCRIPT TO LOAD CMS PROJECTS WITH DIRECT AUTOPLAY VIDEOS -->
   <script>
     async function loadCMSProjects() {
       const grid = document.getElementById('projectGrid');
@@ -419,7 +428,7 @@
             }
           }
 
-          // 2. Sort projects manually by the "order" field (lowest number first)
+          // 2. Sort projects manually by the "order" field
           projectList.sort((a, b) => (a.order || 99) - (b.order || 99));
 
           // 3. Render projects into the grid
@@ -427,14 +436,27 @@
             const card = document.createElement('article');
             card.className = 'card';
             
-            // Set link destination if present
             const targetUrl = data.link || '#';
             const openInNewTab = data.link ? 'target="_blank" rel="noopener noreferrer"' : '';
+
+            // Check if project has a video file attached
+            let mediaElement = '';
+           if (data.video) {
+              // Direct video file auto-plays silently on loop
+              mediaElement = `
+                <video src="${data.video}" autoplay loop muted playsinline poster="${data.image || ''}"></video>
+              `;
+            } else {
+              // Standard static photo
+              mediaElement = `
+                <img src="${data.image}" alt="${data.title}">
+              `;
+            }
 
             card.innerHTML = `
               <a href="${targetUrl}" ${openInNewTab} style="text-decoration: none; color: inherit; display: block;">
                 <div class="card-img-wrapper">
-                  <img src="${data.image}" alt="${data.title}">
+                  ${mediaElement}
                 </div>
                 <div class="card-meta">
                   <div class="card-title">${data.title}</div>
