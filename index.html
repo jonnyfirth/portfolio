@@ -225,6 +225,96 @@
       color: var(--text-light);
       text-decoration: underline;
     }
+    
+    /* SLIDE-OUT INFORMATION DRAWER */
+    .info-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%; /* Hidden offscreen by default */
+      width: 100%;
+      max-width: 450px;
+      height: 100vh;
+      background-color: #111111;
+      border-left: 1px solid #333333;
+      z-index: 100;
+      padding: 5rem 2.5rem 3rem 2.5rem;
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .info-drawer.open {
+      right: 0; /* Slides into view */
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .drawer-content h2 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+      color: var(--text-light);
+    }
+
+    .drawer-content p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #cccccc;
+      margin-bottom: 1.5rem;
+    }
+
+    .drawer-section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--red);
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .drawer-list {
+      list-style: none;
+      font-size: 0.85rem;
+      color: #aaaaaa;
+      line-height: 1.8;
+    }
+
+    .drawer-list a {
+      color: var(--text-light);
+      text-decoration: underline;
+    }
 
  @media (max-width: 1024px) {
       .grid { column-count: 2; } /* 2 columns on tablets */
@@ -241,8 +331,8 @@
   <!-- STICKY TOP HEADER -->
   <header>
     <a href="#" class="logo">Jonny Firth</a>
-    <nav>
-      <a href="#about">Information</a>
+  <nav>
+      <a href="#" id="openInfo">Information</a>
       <a href="mailto:mail@jonnyfirth.com">Contact</a>
     </nav>
   </header>
@@ -374,6 +464,68 @@
         }
       });
     }
+  </script>
+  
+  <!-- DRAWER OVERLAY & PANEL -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <aside class="info-drawer" id="infoDrawer">
+    <button class="drawer-close" id="closeInfo">&times;</button>
+    
+    <div class="drawer-content">
+      <h2>Jonny Firth</h2>
+      <p>
+        Bespoke composition, sound design, sound supervision, and audio mixing across film, television, commercial media, and original artist projects.
+      </p>
+
+      <div class="drawer-section-title">Services</div>
+      <ul class="drawer-list">
+        <li>Music Composition & Scoring</li>
+        <li>Sound Design & Audio Post-Production</li>
+        <li>Mixing & Audio Engineering</li>
+        <li>Sound Supervision & Consultancy</li>
+      </ul>
+
+      <div class="drawer-section-title">Studio</div>
+      <p style="font-size: 0.85rem; color: #aaaaaa;">
+        Based at Tileyard Studios, Kings Cross, London.
+      </p>
+    </div>
+
+    <div>
+      <div class="drawer-section-title">Contact & Links</div>
+      <ul class="drawer-list">
+        <li><a href="mailto:mail@jonnyfirth.com">mail@jonnyfirth.com</a></li>
+        <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://spotify.com" target="_blank" rel="noopener">Spotify</a></li>
+      </ul>
+    </div>
+  </aside>
+  
+  <!-- DRAWER TOGGLE SCRIPT -->
+  <script>
+    const openBtn = document.getElementById('openInfo');
+    const closeBtn = document.getElementById('closeInfo');
+    const drawer = document.getElementById('infoDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+
+    function toggleDrawer(show) {
+      if (show) {
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+      } else {
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+      }
+    }
+
+    openBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDrawer(true);
+    });
+
+    closeBtn.addEventListener('click', () => toggleDrawer(false));
+    overlay.addEventListener('click', () => toggleDrawer(false));
   </script>
   
 </body>
