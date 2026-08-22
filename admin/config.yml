@@ -1,9 +1,16 @@
 backend:
   name: git-gateway
   branch: main
+  show_preview_links: false # Disables unneeded live preview fetches
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
+
+# Prevents Decap from doing heavy media scans on startup
+media_library:
+  name: uploadcare
+  config:
+    publicKey: "demopublickey" # Or use default without scanning large repos
 
 collections:
   - name: "projects"
@@ -13,6 +20,7 @@ collections:
     format: "json"
     create: true
     slug: "{{slug}}"
+    identifier_field: "title"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Category / Year", name: "category", widget: "string" }
