@@ -9,6 +9,8 @@ collections:
   - name: "projects"
     label: "Projects"
     folder: "content/projects"
+    extension: "json"
+    format: "json"
     create: true
     slug: "{{slug}}"
     fields:
