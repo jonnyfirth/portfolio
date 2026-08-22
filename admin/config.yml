@@ -20,3 +20,4 @@ collections:
       - { label: "Video URL / File", name: "video", widget: "string", required: false }
       - { label: "Project Link (URL)", name: "link", widget: "string", required: false }
       - { label: "Sort Order (e.g. 1, 2, 3)", name: "order", widget: "number", value_type: "int", default: 99 }
+- { label: "Hide Project?", name: "hidden", widget: "boolean", default: false, required: false }
