@@ -21,6 +21,7 @@ collections:
     create: true
     slug: "{{slug}}"
     identifier_field: "title"
+    sortable_fields: ["order", "title"] # Enables sorting in CMS UI
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Category / Year", name: "category", widget: "string" }
