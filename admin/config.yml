@@ -5,25 +5,17 @@ backend:
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
-media_library:
-  name: uploadcare
-  # Or use default local media library:
-  folder: "images/uploads"
-
 collections:
   - name: "projects"
     label: "Projects"
     folder: "content/projects"
-    extension: "json"
-    format: "json"
     create: true
     slug: "{{slug}}"
-    identifier_field: "title"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Category / Year", name: "category", widget: "string" }
-      - { label: "Project Image", name: "image", widget: "image" }
+      - { label: "Project Image", name: "image", widget: "image", required: false }
       - { label: "Video URL / File", name: "video", widget: "string", required: false }
       - { label: "Project Link (URL)", name: "link", widget: "string", required: false }
       - { label: "Hide Project?", name: "hidden", widget: "boolean", default: false, required: false }
-      - { label: "Sort Order (e.g. 1, 2, 3)", name: "order", widget: "number", value_type: "int", default: 99 }
+      - { label: "Sort Order", name: "order", widget: "number", value_type: "int", default: 99 }
