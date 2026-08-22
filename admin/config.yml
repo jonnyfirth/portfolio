@@ -13,6 +13,7 @@ collections:
     format: "json"
     create: true
     slug: "{{slug}}"
+    identifier_field: "title"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Category / Year", name: "category", widget: "string" }
