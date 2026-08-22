@@ -428,12 +428,8 @@
             }
           }
 
-          // 2. Sort projects manually by the "order" field
-       projects.sort((a, b) => {
-    const orderA = parseInt(a.order) || 99;
-    const orderB = parseInt(b.order) || 99;
-    return orderA - orderB;
-  });
+      // 2. Sort projects manually by the "order" field (safe for both numbers and strings)
+projectList.sort((a, b) => (parseInt(a.order) || 99) - (parseInt(b.order) || 99));
 
           // 3. Render projects into the grid
       for (const data of projectList) {
