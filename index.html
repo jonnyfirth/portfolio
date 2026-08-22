@@ -432,7 +432,10 @@
           projectList.sort((a, b) => (a.order || 99) - (b.order || 99));
 
           // 3. Render projects into the grid
-          for (const data of projectList) {
+      for (const data of projectList) {
+            // Skip hidden projects automatically
+            if (data.hidden === true) continue;
+
             const card = document.createElement('article');
             card.className = 'card';
             
